@@ -3,9 +3,9 @@ using System.Text;
 
 namespace IbanSharp.Generators;
 
-public class IbanChecksumGenerator
+internal class IbanChecksumGenerator
 {
-    public string GenerateIbanChecksum(string countryCode, string bban)
+    internal string GenerateIbanChecksum(string countryCode, string bban)
     {
         // Step 1: Move country code and checksum to the end
         string rearranged = bban + countryCode + "00";
@@ -21,12 +21,10 @@ public class IbanChecksumGenerator
         }
 
         // Step 3: Calculate the remainder of the numeric IBAN mod 97
-        BigInteger ibanNumber = BigInteger.Parse(numericIban.ToString());
+        var ibanNumber = BigInteger.Parse(numericIban.ToString());
         int checksum = 98 - (int)(ibanNumber % 97);
 
         // Step 4: Format checksum as two digits
         return checksum.ToString("D2");
     }
-
-    
 }

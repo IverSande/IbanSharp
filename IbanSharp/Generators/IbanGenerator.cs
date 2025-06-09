@@ -7,7 +7,7 @@ internal class IbanGenerator
 {
     internal Iban Generate(string countryCode) => countryCode switch
     {
-        "NO" => new Iban(Norway.GenerateBban(), countryCode),
-        _ => new Iban(Norway.GenerateBban(), countryCode)
+        "NO" => new Iban(new Norway().GenerateBban(), countryCode),
+        _ => new Iban(new Norway().GenerateBban(), countryCode),
     };
 }

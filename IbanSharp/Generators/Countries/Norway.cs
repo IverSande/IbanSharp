@@ -2,13 +2,14 @@ using IbanSharp.Types;
 
 namespace IbanSharp.Generators.Countries;
 
-internal static class Norway
+internal class Norway
 {
-    private static readonly Random Random = new();
-    private static readonly int[] Numbers = Enumerable.Range(0, 9).Select(c => c).ToArray();
-    private static List<int> Numeric(int length) => Enumerable.Range(0, length).Select(_ => Numbers[Random.Next(0, 9)]).ToList();
+    private readonly Random _random = new();
+    private readonly int[] _numbers = Enumerable.Range(0, 9).Select(c => c).ToArray();
+    private List<int> Numeric(int length) => Enumerable.Range(0, length).Select(_ => _numbers[_random.Next(0, 9)]).ToList();
     
-    internal static Bban GenerateBban()
+    //Will not generate a legal bank code, but a bban with legal checksums for norway
+    internal Bban GenerateBban()
     {
         int[] weights = [5, 4, 3, 2, 7, 6, 5, 4, 3, 2];
         var accountNumber = Numeric(10);
