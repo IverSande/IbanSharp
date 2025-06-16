@@ -8,7 +8,8 @@ internal class Norway
     private readonly int[] _numbers = Enumerable.Range(0, 9).Select(c => c).ToArray();
     private List<int> Numeric(int length) => Enumerable.Range(0, length).Select(_ => _numbers[_random.Next(0, 9)]).ToList();
     
-    //Will not generate a legal bank code, but a bban with legal checksums for norway
+    //Will not generate a legal bank code, but a bban with legal bban checksums for
+    //norway and a bankcode that is probably not corresponding to a real bank
     internal Bban GenerateBban()
     {
         int[] weights = [5, 4, 3, 2, 7, 6, 5, 4, 3, 2];
@@ -21,8 +22,10 @@ internal class Norway
             checkSum = NoBbanChecksum(accountNumber);
         }
         accountNumber.Add(checkSum);
+
+        var bbanString = string.Join("", accountNumber);
         
-        return new Bban(string.Join("", accountNumber));
+        return new Bban(bbanString, bbanString[..3]);
 
 
         int NoBbanChecksum(List<int> an)
@@ -31,7 +34,5 @@ internal class Norway
             return 11 - sum % 11;
         }
     }
-    
-    
 
 }

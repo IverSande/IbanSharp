@@ -4,18 +4,15 @@ namespace IbanSharp.Types;
 
 public class Iban
 {
-    private IbanChecksumGenerator ChecksumGenerator { get; set; } = new();
+    private IbanChecksumGenerator ChecksumGenerator { get; } = new();
     public string IbanString { get; init; }
     public string CountryCode { get; init; }
     public Bban Bban { get; init; }
-    public string? BankCode { get; init; }
-    public string? BranchCode { get; init; }
+    
+    public string BankCode => Bban.BankCode ?? string.Empty;
+    public string BranchCode => Bban.BranchCode ?? string.Empty;
 
-    public Iban(string ibanAsString)
-    {
-        
-        IbanString = ibanAsString;
-    }
+    public Iban(string ibanAsString) : this(new Bban(ibanAsString[4..]), ibanAsString[..1]) {}
 
     public Iban(Bban bban, string countryCode)
     {

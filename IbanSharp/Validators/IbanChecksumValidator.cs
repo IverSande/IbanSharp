@@ -5,7 +5,7 @@ namespace IbanSharp.Validators;
 
 internal class IbanChecksumValidator
 {
-    internal bool IsValidIban(string iban)
+    internal bool HasValidIbanChecksum(string iban)
     {
         if (string.IsNullOrWhiteSpace(iban))
             return false;

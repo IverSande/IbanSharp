@@ -17,7 +17,7 @@ public class IbanChecksumValidatorTest
         var ibanValidator = new IbanChecksumValidator();
 
         //Act
-        var result = ibanValidator.IsValidIban(iban);
+        var result = ibanValidator.HasValidIbanChecksum(iban);
         
         //Assert
         Assert.AreEqual(expectedResult, result);
